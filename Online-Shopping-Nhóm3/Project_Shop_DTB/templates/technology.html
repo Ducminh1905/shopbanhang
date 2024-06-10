@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Shop Homepage - Start Bootstrap Template</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fashion.css') }}">
+    <style>
+        .cart-box {
+            position: fixed;
+            right: -33.33%;
+            top: 0;
+            width: 33.33%;
+            height: 100%;
+            background-color: white;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: right 0.3s ease;
+            z-index: 1000;
+        }
+
+        .cart-box.show {
+            right: 0;
+        }
+
+        #cart-items {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #cart-items li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px solid #ccc;
+        }
+        .cart-item-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-price {
+            margin-left: 10px;
+        }
+
+        .delete-button {
+            background: none;
+            border: none;
+            color: red;
+            cursor: pointer;
+        }
+        #delete-all {
+            background: none;
+            border: none;
+            color: red;
+            cursor: pointer;
+            float: right;
+            margin-top: 10px;
+        }
+
+        #close-cart {
+            margin-top: 20px;
+        }
+        #total-price {
+            font-weight: bold;
+            text-align: right;
+            margin-top: 20px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10vh; /* This makes the container take up the full height of the viewport */
+        }
+       
+    </style>
+</head>
+<body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#!">The Shop House</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('main') }}">Trang chủ</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cửa hàng</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">All Products</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <button class="btn btn-outline-dark" type="button" id="cart-button">
+                   <i class="bi-cart-fill me-1"></i>
+                   Giỏ hàng (<span id="cart-count">0</span>)
+               </button>
+                </form>
+                <a href="{{ url_for('login') }}" style="color: black; text-decoration: none;">&nbsp;&nbsp;&nbsp;Đăng xuất</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Header-->
+    <header class="bg-dark py-2">
+        <div class="container px-6 px-lg-6 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder" style="font-size: 5rem;">&nbsp</h1>
+                <p class="lead fw-normal text-white-50 mb-0" style="font-size: 1.5rem;">&nbsp</p>
+            </div>
+        </div>
+    </header>
+    <!-- Section-->
+    <section class="py-5">
+        <div class = "textbig">
+            <h1 style="font-size: 3rem;">Đồ Công Nghệ</h1></div>
+        </div>
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-5 justify-content-center">
+                <div class="col mb-5">
+                    <div class="card h-100" data-image="static/img/iphone.png" data-price="30992.000">
+                        <img class="card-img-top" src="static/img/iphone.png" alt="Description of image" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder"> Apple iPhone 15 Pro Max 256GB</h5>
+                                <!-- Product price-->
+                                <span class="text-muted text-decoration-line-through">₫40.990.000</span>
+                                ₫30.992.333
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto add-to-cart" href="#">Thêm vào giỏ</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100" data-image="static/img/ss.png" data-price="30228.389">
+                     
+                        <!-- Product image-->
+                        <img class="card-img-top" src="static/img/ss.png" alt="Description of image" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Samsung Galaxy A05 4GB/128GB</h5>
+                                <span class="text-muted text-decoration-line-through">₫39.268.000</span>
+                                ₫30.228.389
+                                <!-- Product reviews-->
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto add-to-cart" href="#">Thêm vào giỏ</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100" data-image="static/img/xi.png" data-price="20839.000">
+                
+                        <!-- Product image-->
+                        <img class="card-img-top" src="static/img/xi.png" alt="Description of image" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Redmi Note 13 Pro 4G (8+128GB)</h5>
+                                ₫20.839.490
+     
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto add-to-cart" href="#">Thêm vào giỏ</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100" data-image="static/img/key.png" data-price="2923.293">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="static/img/key.png" alt="Description of image" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Bàn Phím Xịn</h5>
+                                <!-- Product reviews-->
+                                ₫2.923.293
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto add-to-cart" href="#">Thêm vào giỏ</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100" data-image="static/img/mouse.png" data-price="2478.000">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="static/img/mouse.png" alt="Description of image" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Chuột Bluetooth Vip</h5>
+                                <!-- Product price-->
+                                ₫2.478.000
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto add-to-cart" href="#">Thêm vào giỏ</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="static/img/air.png" alt="Description of image" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Airpod Riel</h5>
+                                <!-- Product price-->
+                                ₫78.000
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Thêm vào giỏ</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+        
+                        <!-- Product image-->
+                        <img class="card-img-top" src="static/img/lap.png" alt="Description of image" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Laptop Asus Vivobook 15 X1504ZA-NJ582W </h5>
+                                <span class="text-muted text-decoration-line-through">₫20.268.000</span>
+                                ₫18.178.000
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Thêm vào giỏ</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="static/img/mac.png" alt="Description of image" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Macbook Pr0by 20xx</h5>
+                                <!-- Product price-->
+                                ₫100.000.000
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Thêm vào giỏ</a></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+          
+                        <!-- Product image-->
+                        <img class="card-img-top" src="static/img/case.png" alt="Description of image" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Case PC phát sáng bling bling</h5>
+                                <!-- Product reviews-->
+                                 
+                                ₫3.930.290
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Thêm vào giỏ</a></div>
+                        </div>
+                    </div>
+                </div>
+
+               
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                       
+                        <!-- Product image-->
+                        <img class="card-img-top" src="static/img/sold.png" alt="Description of image" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Sản Phẩm Đã Hết</h5>
+                                <!-- Product reviews-->
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                   
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                       
+                        <!-- Product image-->
+                        <img class="card-img-top" src="static/img/sold.png" alt="Description of image" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Sản Phẩm Đã Hết</h5>
+                                <!-- Product reviews-->
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                   
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                       
+                        <!-- Product image-->
+                        <img class="card-img-top" src="static/img/sold.png" alt="Description of image" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Sản Phẩm Đã Hết</h5>
+                                <!-- Product reviews-->
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                   
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                       
+                        <!-- Product image-->
+                        <img class="card-img-top" src="static/img/sold.png" alt="Description of image" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Sản Phẩm Đã Hết</h5>
+                                <!-- Product reviews-->
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                   
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="cart-box" class="cart-box">
+            <h5>Giỏ hàng của bạn</h5>
+            <ul id="cart-items"></ul>
+            <button class="btn btn-danger" id="delete-all">Xóa tất cả</button>
+            <button class="btn btn-dark" id="close-cart">Đóng</button>
+            <div id="total-price">Tổng: $0.00</div>
+            <div class="button-container">
+                <a href="{{ url_for('pay') }}">
+                    <button class="btn btn-danger" id="pay">Thanh toán</button>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <script src="static/js/cart.js"></script>
+</body>
+</html>

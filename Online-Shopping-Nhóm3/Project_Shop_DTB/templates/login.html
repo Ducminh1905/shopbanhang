@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--=============== REMIXICONS ===============-->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!--=============== CSS ===============-->
+ 
+
+  <title>Login_form</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+ <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ 
+ </head>
+ <body>
+  <div class="container">
+      <div class="login__content">
+        <img src="{{ url_for('static', filename='img/imagee.jpg') }}" alt="login image" class="login__img">
+
+          <form action="" class="login__form">
+              <div>
+                  <h1 class="login__title">
+                      <span>The Shop House</span> Xin chào
+                  </h1>
+                  <p class="login__description">
+                      Đăng nhập tại đây!
+                  </p>
+              </div>
+              
+              <div>
+                  <div class="login__inputs">
+                      
+
+                      <div>
+                        <label>Tài khoản</label>    
+                        <input type="text" class="form-control" name="username" placeholder="Username" id="username" required>
+                        <p class="login__description">
+                           &nbsp
+                        </p>
+                          <label>Mật khẩu</label>
+                          <input type="password" class="form-control" name="password" placeholder="Password" id="password" required>
+
+                
+              </div>
+                        <div class="log">
+                            <a href="{{ url_for('main') }}">Đăng nhập</a>
+                        </div>
+                
+                    <div class = "reg">
+                            <a href="{{ url_for('register') }}">Đăng ký</a>
+                  
+                    </div>
+                    <a href="{{ url_for('admin') }}">.</a>
+                  
+              </div>
+          </form>
+      </div>
+  </div>
+
+
+  <!--=============== MAIN JS ===============-->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
